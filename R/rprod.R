@@ -1,4 +1,4 @@
-#' Computes rate product of three currencies
+#' Computes currency rate products
 #' 
 #' The function returns the rate product of three currencies. Rate products
 #' larger than 1 signal arbitrage opportunity.
@@ -13,40 +13,84 @@
 #'  @param rate2 See 'rate1'
 #'  @param rate3 See 'rate1' 
 #' @export
-#'
+#' @seealso \code{\link{arb_plots}}
+#' @return A data frame with 3 columns: timestamp, first rate product, and second rate product
+#' @examples
+#' data(forex_quotes)
+#' rate_products <- rprod(ticks, "EURUSD", "GBPUSD", "EURGBP")
+#' head(rate_products)
+#' 
 #'
 rprod <- function(x, rate1, rate2, rate3) {
-  # to compute rate product, the rates must have proper form
-  # get the base and quote currencies of the rates first:
-  rates <- c(rate1, rate2, rate3)
-  base_currs <- sapply(rates, function(x) substr(x, 1, 3))
-  quote_currs <- sapply(rates, function(x) substr(x, 4, 6))
-  # each of the three currencies must appear exactly twice,
-  # either as base or quote, otherwise no triangular arbitrage possible
-  if (!all(table(c(base_currs, quote_currs)) == 2)) 
-    stop("No triangular arbitrage possible given the specified currencies")
-  
-  # rate product 1
-  if (quote_currs[1] == base_currs[2]) {
-    if (base_currs[1] == quote_currs[3]) { 
-      rp1 <- x[, 2] * x[, 4] * x[, 6] 
-    } else {
-      rp1 <- x[, 2] * x[, 4] / x[, 7]
+    # to compute rate product, the rates must have proper form
+    # get the base and quote currencies of the rates first:
+    rates <- c(rate1, rate2, rate3)
+    base_currs <- sapply(rates, function(x) substr(x, 1, 3))
+    quote_currs <- sapply(rates, function(x) substr(x, 4, 6))
+    # each of the three currencies must appear exactly twice,
+    # either as base or quote, otherwise no triangular arbitrage possible
+    if (!all(table(c(base_currs, quote_currs)) == 2)) 
+        stop("No triangular arbitrage possible given the specified currencies")
+    
+    # computing the rate product
+    if (quote_currs[1] == base_currs[2]) { # case AB, BC, XX
+        if (base_currs[1] == quote_currs[3]) { 
+            # case AB, BC, CA 
+            rp1 <- x[, 2] * x[, 4] * x[, 6]
+            rp2 <- 1 / x[, 7] / x[, 5] / x[, 3]
+        } 
+        else {  # case AB, BC, AC
+                rp1 <- x[, 2] * x[, 4] / x[, 7]
+                rp2 <- x[, 6] / x[, 5] / x[, 3]
+        }
+    } 
+    
+    else if (quote_currs[1] == quote_currs[2]) { # case AB, CB, XX
+        if (base_currs[1] == base_currs[3]) {
+            # case AB, CB, AC
+            rp1 <- x[, 2] / x[, 5] / x[, 7]
+            rp2 <- x[, 6] * x[, 4] / x[, 3]
+        } 
+        else {# case AB, CB, CA
+            rp1 <- x[, 2] / x[, 5] * x[, 6]
+            rp2 <- 1 / x[, 7] * x[, 4] / x[, 3]
+        }
+    } 
+    
+    else if (base_currs[1] == base_currs[2]) {# case AB, AC, XX
+        if (quote_currs[1] == base_currs[3]) {
+            # case AB, AC, BC
+            rp1 <- x[, 2] * x[, 4] / x[, 7]
+            rp2 <- x[, 6] / x[, 5] / x[, 3]
+        } 
+        else {
+            # case AB, AC, CB
+            rp1 <- x[, 2] / x[, 5] / x[, 7]
+            rp2 <- x[, 6] * x[, 4] / x[, 3]
+        }
     }
-  } else if (quote_currs[1] == quote_currs[2]) {
-    if (base_currs[1] == base_currs[3]) {
-      rp1 <- x[, 2] / x[, 5] / x[, 7]
-    } else {
-      rp1 <- x[, 2] / x[, 5] * x[, 6]
+    else { # case AB, CA, XX
+        if (quote_currs[1] == base_currs[3]) { 
+            # case AB, CA, BC
+            rp1 <- x[, 2] * x[, 4] * x[, 6]
+            rp2 <- 1 / x[, 7] / x[, 5] / x[, 3]
+        }
+        else {# case AB, CA, CB
+            rp1 <- x[, 2] / x[, 5] * x[, 6]
+            rp2 <- 1 / x[, 7] * x[, 4] / x[, 3]    
+        }     
     }
-  } else {
-    if (quote_currs[1] == base_currs[1]) {
-      rp1 <- x[, 2] * x[, 6] / x[, 5]
-    } else {
-      rp1 <- x[, 2] / x[, 7] / x[, 5]
-    }
-  }  
   
-  return(data.frame(x$timestamp, rp1))
-  
+    result <- data.frame(x$timestamp, rp1, rp2)
+
+    # construct column names of the returned data frame
+    currs <- unique(c(base_currs, quote_currs))
+    rp1_name <- paste(base_currs[1], "-", quote_currs[1], "-", sep="")
+    rp1_name <- paste(rp1_name, currs[!(currs %in% c(base_currs[1], quote_currs[1]))], "-", base_currs[1], sep="")
+    rp2_name <- paste(base_currs[1], "-", currs[!(currs %in% c(base_currs[1], quote_currs[1]))], sep="")
+    rp2_name <- paste(rp2_name, "-", quote_currs[1], "-", base_currs[1], sep="")
+
+    names(result) <- c("timestamp", rp1_name, rp2_name)
+
+    return(result)  
 }

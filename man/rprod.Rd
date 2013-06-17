@@ -1,6 +1,6 @@
 \name{rprod}
 \alias{rprod}
-\title{Computes rate product of three currencies}
+\title{Computes currency rate products}
 \usage{
   rprod(x, rate1, rate2, rate3)
 }
@@ -23,9 +23,21 @@
 
   \item{rate3}{See 'rate1'}
 }
+\value{
+  A data frame with 3 columns: timestamp, first rate
+  product, and second rate product
+}
 \description{
   The function returns the rate product of three
   currencies. Rate products larger than 1 signal arbitrage
   opportunity.
+}
+\examples{
+data(forex_quotes)
+rate_products <- rprod(ticks, "EURUSD", "GBPUSD", "EURGBP")
+head(rate_products)
+}
+\seealso{
+  \code{\link{arb_plots}}
 }
 

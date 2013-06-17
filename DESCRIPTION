@@ -10,3 +10,4 @@ Description: This package helps analyze triangular arbitrage opportunities in
 License: No license whatsoever
 Collate:
     'rprod.R'
+    'arb_plots.R'
