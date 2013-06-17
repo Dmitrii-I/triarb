@@ -17,11 +17,36 @@
 #'
 rprod <- function(x, rate1, rate2, rate3) {
   # to compute rate product, the rates must have proper form
-  basecurr1 <- substr(rate1, 1, 3)
-  quotecurr1 <- substr(rate1, 4, 6)
-  basecurr2 <- substr(rate2, 1, 3)
-  quotecurr2 <- substr(rate2, 4, 6)
-  basecurr3 <- substr(rate3, 1, 3)
-  quotecurr3 <- substr(rate3, 4, 6)
+  # get the base and quote currencies of the rates first:
+  rates <- c(rate1, rate2, rate3)
+  base_currs <- sapply(rates, function(x) substr(x, 1, 3))
+  quote_currs <- sapply(rates, function(x) substr(x, 4, 6))
+  # each of the three currencies must appear exactly twice,
+  # either as base or quote, otherwise no triangular arbitrage possible
+  if (!all(table(c(base_currs, quote_currs)) == 2)) 
+    stop("No triangular arbitrage possible given the specified currencies")
+  
+  # rate product 1
+  if (quote_currs[1] == base_currs[2]) {
+    if (base_currs[1] == quote_currs[3]) { 
+      rp1 <- x[, 2] * x[, 4] * x[, 6] 
+    } else {
+      rp1 <- x[, 2] * x[, 4] / x[, 7]
+    }
+  } else if (quote_currs[1] == quote_currs[2]) {
+    if (base_currs[1] == base_currs[3]) {
+      rp1 <- x[, 2] / x[, 5] / x[, 7]
+    } else {
+      rp1 <- x[, 2] / x[, 5] * x[, 6]
+    }
+  } else {
+    if (quote_currs[1] == base_currs[1]) {
+      rp1 <- x[, 2] * x[, 6] / x[, 5]
+    } else {
+      rp1 <- x[, 2] / x[, 7] / x[, 5]
+    }
+  }  
+  
+  return(data.frame(x$timestamp, rp1))
   
 }
