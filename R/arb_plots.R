@@ -5,7 +5,7 @@
 #' @export
 #'
 #'
-#'@seealso \code{\link{rprod}}
+#'@seealso \code{\link{rate_prod}}
 #' @return Two plots, showing arbitrage opportunities for each of two possible roundtrips
 #' @examples
 #' data(forex_quotes)

@@ -1,0 +1,20 @@
+\name{has_header}
+\alias{has_header}
+\title{Does a csv file have a header}
+\usage{
+  has_header(csv_file_path)
+}
+\arguments{
+  \item{csv_file_path}{Full path to a csv file}
+}
+\value{
+  Returns TRUE if all values on first row are non-numeric.
+  Otherwise, returns FALSE.
+}
+\description{
+  Helps determine if a csv file has a header.
+}
+\examples{
+# has_header("~/EURUSD.csv")
+}
+

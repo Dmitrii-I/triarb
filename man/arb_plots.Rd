@@ -21,6 +21,6 @@ rate_products <- rprod(ticks, "EURUSD", "GBPUSD", "EURGBP")
 arb_plots(rate_products)
 }
 \seealso{
-  \code{\link{rprod}}
+  \code{\link{rate_prod}}
 }
 
