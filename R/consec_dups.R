@@ -10,9 +10,9 @@
 #' 
 #' @examples
 #' 
-#' data(forex_quotes)
-#' dups <- consec_dups(forex_quotes)
-#' forex_quotes <- forex_quotes[-dups, ] # removes the duplicates 
+#' data(AUDCAD)
+#' dups <- consec_dups(AUDCAD)
+#' AUDCAD <- AUDCAD[-dups, ] # removes the duplicates 
 #' 
 consec_dups <- function(x) {
     # Returns indexes of two or more consecutive duplicate rows.

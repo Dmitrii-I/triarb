@@ -17,8 +17,8 @@
   Compute lookback medians.
 }
 \examples{
-data(forex_quotes)
-medians <- lookback_medians(forex_quotes[, 2])
+data(AUDCAD)
+medians <- lookback_medians(AUDCAD[, 2])
 head(medians)
 }
 

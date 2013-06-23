@@ -2,11 +2,14 @@
 \alias{clean_quotes}
 \title{A wrapper function to clean the currency rate quotes}
 \usage{
-  clean_quotes(x)
+  clean_quotes(x, verbose = TRUE)
 }
 \arguments{
   \item{x}{A data frame with first column being the
   date-time stamp of POSIXct class}
+
+  \item{verbose}{logical TRUE or FALSE specifying whether
+  function should output a summary as a side-effect.}
 }
 \value{
   A data frame with 3 columns: timestamp, first rate
@@ -17,9 +20,8 @@
   arrange according to timestamp.
 }
 \examples{
-data(forex_quotes)
-rate_products <- rate_prod(ticks, "EURUSD", "GBPUSD", "EURGBP")
-head(rate_products)
+data(AUDCAD)
+AUDCAD <- clean_quotes(AUDCAD)
 }
 \seealso{
   \code{\link{arb_plots}}

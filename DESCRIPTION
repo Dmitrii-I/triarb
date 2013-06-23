@@ -9,13 +9,13 @@ Description: This package helps analyze triangular arbitrage opportunities in
     currency exchange rates
 License: No license whatsoever
 Collate:
-    'arb_plots.R'
-    'load_from_csv.R'
-    'rate_prod.R'
-    'clean_quotes.R'
     'align.R'
+    'arb_plots.R'
+    'clean_quotes.R'
     'consec_dups.R'
-    'has_header.R'
-    'outliers.R'
     'lookahead_medians.R'
     'lookback_medians.R'
+    'outliers.R'
+    'rate_prod.R'
+    'has_header.R'
+    'load_from_csv.R'

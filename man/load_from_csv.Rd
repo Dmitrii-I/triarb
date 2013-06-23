@@ -6,7 +6,8 @@
 }
 \arguments{
   \item{csv_file_path}{Full path to a csv file containing
-  the currency rate quotes.}
+  at least a timestamp, bid, and ask quotes for a single
+  currency rate.}
 
   \item{header}{logical TRUE or FALSE, indicating whether
   the csv file has a header in the first row.}

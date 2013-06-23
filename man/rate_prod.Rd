@@ -33,9 +33,12 @@
   arbitrage opportunity.
 }
 \examples{
-data(forex_quotes)
-rate_products <- rate_prod(ticks, "EURUSD", "GBPUSD", "EURGBP")
-head(rate_products)
+data(AUDCAD, AUDCHF, CADCHF)
+AUDCAD <- clean_quotes(AUDCAD)
+AUDCHF <- clean_quotes(AUDCHF)
+CADCHF <- clean_quotes(CADCHF)
+x <- align(list(AUDCAD, AUDCHF, CADCHF))
+rp <- rate_prod(x, "AUDCAD", "AUDCHF", "CADCHF")
 }
 \seealso{
   \code{\link{arb_plots}}

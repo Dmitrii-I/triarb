@@ -17,4 +17,11 @@
   to be in the wide format. This function returns such data
   frame.
 }
+\examples{
+data(AUDCAD, AUDCHF, CADCHF)
+AUDCAD <- clean_quotes(AUDCAD)
+AUDCHF <- clean_quotes(AUDCHF)
+CADCHF <- clean_quotes(CADCHF)
+combined <- align(list(AUDCAD, AUDCHF, CADCHF)) # this may take some time to complete
+}
 

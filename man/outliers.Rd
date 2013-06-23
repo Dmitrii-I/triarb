@@ -26,7 +26,7 @@
   non-outlier values.
 }
 \examples{
-data(forex_quotes)
-outliers(forex_quotes[, 2])
+data(AUDCAD)
+outliers(AUDCAD[, 2])
 }
 

@@ -16,9 +16,12 @@
 #' @seealso \code{\link{arb_plots}}
 #' @return A data frame with 3 columns: timestamp, first rate product, and second rate product
 #' @examples
-#' data(forex_quotes)
-#' rate_products <- rate_prod(ticks, "EURUSD", "GBPUSD", "EURGBP")
-#' head(rate_products)
+#' data(AUDCAD, AUDCHF, CADCHF)
+#' AUDCAD <- clean_quotes(AUDCAD)
+#' AUDCHF <- clean_quotes(AUDCHF)
+#' CADCHF <- clean_quotes(CADCHF)
+#' x <- align(list(AUDCAD, AUDCHF, CADCHF))
+#' rp <- rate_prod(x, "AUDCAD", "AUDCHF", "CADCHF")
 #' 
 #'
 rate_prod <- function(x, rate1, rate2, rate3) {
@@ -60,8 +63,8 @@ rate_prod <- function(x, rate1, rate2, rate3) {
     else if (base_currs[1] == base_currs[2]) {# case AB, AC, XX
         if (quote_currs[1] == base_currs[3]) {
             # case AB, AC, BC
-            rp1 <- x[, 2] * x[, 4] / x[, 7]
-            rp2 <- x[, 6] / x[, 5] / x[, 3]
+            rp1 <- x[, 2] * x[, 6] / x[, 5]
+            rp2 <- x[, 4] / x[, 7] / x[, 3]
         } 
         else {
             # case AB, AC, CB

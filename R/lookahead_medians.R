@@ -8,8 +8,8 @@
 #' @export
 #' @return Returns a vector of medians having same length as 'x'. 
 #' @examples
-#' data(forex_quotes)
-#' medians <- lookahead_medians(forex_quotes[, 2])
+#' data(AUDCAD)
+#' medians <- lookahead_medians(AUDCAD[, 2])
 #' head(medians)
 #'
 

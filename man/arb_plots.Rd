@@ -16,8 +16,6 @@
   opportunities found in a currencies triple.
 }
 \examples{
-data(forex_quotes)
-rate_products <- rprod(ticks, "EURUSD", "GBPUSD", "EURGBP")
 arb_plots(rate_products)
 }
 \seealso{
