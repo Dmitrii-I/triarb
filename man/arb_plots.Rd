@@ -5,7 +5,7 @@
   arb_plots(x)
 }
 \arguments{
-  \item{x}{A data frame returned by 'rprod'}
+  \item{x}{A data frame returned by 'rate_prod'}
 }
 \value{
   Two plots, showing arbitrage opportunities for each of
