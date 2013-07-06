@@ -1,7 +1,7 @@
 #' Does a csv file have a header
-#'
+#' 
 #' Helps determine if a csv file has a header.
-#'
+#' 
 #' @param csv_file_path Full path to a csv file
 #' @export
 #' @return Returns TRUE if all values on first row are non-numeric. Otherwise, returns FALSE.

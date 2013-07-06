@@ -1,16 +1,15 @@
 #' Loads quotes from a csv file
-#'
+#' 
 #' This function is useful for loading quotes in a csv file into a data frame.
-#'
-#' @param csv_file_path Full path to a csv file containing at least a timestamp, bid, and 
-#' ask quotes for a single currency rate.
-#'
+#' 
+#' @param csv_file_path Full path to a csv file containing the currency rate quotes.
+#' 
 #' @param header logical TRUE or FALSE, indicating whether the csv file has a header in the first row.
-#'
+#' 
 #' @export
-#'
-#' @return A data frame with POSIXct class timestamp in the first column.
-#'
+#' 
+#' @return A data frame with POSIXct class timestamp in the first column. 
+#' 
 #' @examples
 #' # quotes <- load_from_csv("~/EURUSD.csv", header=TRUE)
 
