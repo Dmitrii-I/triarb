@@ -1,4 +1,4 @@
-# TO DO
+# To do
 
 - Address scenario when first column of csv file does not contain valid timestamp.
 
@@ -21,6 +21,8 @@ of such trading systems:
 at the market prices. This is quite a risky strategy though.
     - if there is a triangular arbitrage opportunity, perform the three trades at limit prices
     - and similar
+
+- allow for bid- and ask-sizes to be incorporate into the analysis
 
 - Add a summary function `arb_summary`.
 

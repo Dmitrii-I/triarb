@@ -1,7 +1,7 @@
 #' Visualize triangular arbitrage opportunities
 #' 
 #' This function plots a bar chart of arbitrage opportunities found in a currencies triple. 
-#' @param x A data frame returned by 'rate_prod'
+#' @param rp A data frame returned by 'rate_prod' function
 #' @export
 #'
 #'
@@ -10,7 +10,7 @@
 #' @examples
 #' arb_plots(rate_products)
 #' 
-arb_plots <- function(x) {
+arb_plots <- function(rp) {
     par(mfrow=c(2, 1))
 	pips_mult <- 10000L # multiplier to obtain pips from currency rate
 
@@ -18,28 +18,29 @@ arb_plots <- function(x) {
 	y_axis_lab <- "Profit in pips"
     
 	# arbitrage opportunities for the first roundtrip
-    arb1 <- x[x[, 2] > 1, c(1, 2)]
+    arb1 <- rp[rp[, 2] > 1, c(1, 2)]
 	names(arb1) <- c("timestamp", "profit")
 	arb1$profit <- (arb1$profit - 1) * pips_mult
 
 	# build plot title
 	n <- nrow(arb1)
-	roundtrip <- names(x)[2]
+	roundtrip <- names(rp)[2]
 	title <- (paste(n, " arbitrage opportunities in ", roundtrip, " roundtrip")) 
 	
     barplot(sort(arb1$profit, decreasing=TRUE), xlab=x_axis_lab, ylab=y_axis_lab, main=title)
    
  
 	# arbitrage opportunities for the second roundtrip
-    arb2 <- x[x[, 3] > 1, c(1, 2)]
+    arb2 <- rp[rp[, 3] > 1, c(1, 3)]
 	names(arb2) <- c("timestamp", "profit")
 	arb2$profit <- (arb2$profit - 1) * pips_mult
 
+
 	# build plot title
 	n <- nrow(arb2)
-	roundtrip <- names(x)[3]
+	roundtrip <- names(rp)[3]
 	title <- (paste(n, " arbitrage opportunities in ", roundtrip, " roundtrip")) 
 	
-    barplot(sort(arb1$profit, decreasing=TRUE), xlab=x_axis_lab, ylab=y_axis_lab, main=title)
+    barplot(sort(arb2$profit, decreasing=TRUE), xlab=x_axis_lab, ylab=y_axis_lab, main=title)
     
 }

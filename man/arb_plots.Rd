@@ -2,10 +2,10 @@
 \alias{arb_plots}
 \title{Visualize triangular arbitrage opportunities}
 \usage{
-  arb_plots(x)
+  arb_plots(rp)
 }
 \arguments{
-  \item{x}{A data frame returned by 'rate_prod'}
+  \item{rp}{A data frame returned by 'rate_prod' function}
 }
 \value{
   Two plots, showing arbitrage opportunities for each of
