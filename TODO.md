@@ -4,9 +4,6 @@
 
 - Prettify the info printed by `load_from_csv`
 
-- `arb_plots` function should include a plot of arbitrage opportunity size vs 
-duration in milliseconds
-
 - Make sure the package works with JPY as quote currency (and other currencies).
 When JPY is the quote currency, the exchange rate is almost always larger than 1.
 This could lead to problems, if we for example coded in the package the pip to be equal
@@ -23,6 +20,8 @@ at the market prices. This is quite a risky strategy though.
     - and similar
 
 - allow for bid- and ask-sizes to be incorporate into the analysis
+
+- Need to make plots in `arb_plots` prettier: larger and maybe colors?
 
 - Add a summary function `arb_summary`.
 
