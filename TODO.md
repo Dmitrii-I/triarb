@@ -1,11 +1,8 @@
 # TO DO
 
-- Add `verbose` argument to function `load_from_csv` so that when the function is executed
-a short status message is printed to the console. I.e. 
-```R
-my_data <-load_from_csv("~/EURUSD.csv", verbose=TRUE)
-```
-should output either `Could not find file` or `Loaded 250,435 quotes`
+- Address scenario when first column of csv file does not contain valid timestamp.
+
+- Prettify the info printed by `load_from_csv`
 
 - `arb_plots` function should include a plot of arbitrage opportunity size vs 
 duration in milliseconds
