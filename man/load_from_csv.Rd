@@ -1,8 +1,9 @@
 \name{load_from_csv}
 \alias{load_from_csv}
-\title{Loads quotes from a csv file}
+\title{Load quotes from a csv file}
 \usage{
-  load_from_csv(csv_file_path, header = NULL)
+  load_from_csv(csv_file_path, header = NULL,
+    verbose = TRUE)
 }
 \arguments{
   \item{csv_file_path}{Full path to a csv file containing
@@ -10,16 +11,21 @@
 
   \item{header}{logical TRUE or FALSE, indicating whether
   the csv file has a header in the first row.}
+
+  \item{verbose}{logical TRUE or FALSE. If TRUE, shows a
+  summary of the loaded quotes.}
 }
 \value{
   A data frame with POSIXct class timestamp in the first
   column.
 }
 \description{
-  This function is useful for loading quotes in a csv file
-  into a data frame.
+  Load quotes stored in a csv file into a data frame. The
+  csv file must have a specific format: the first three
+  values in each row should be the datetime-stamp, the bid
+  price, and the ask price, respectively.
 }
 \examples{
-# quotes <- load_from_csv("~/EURUSD.csv", header=TRUE)
+# quotes <- load_from_csv("~/EURUSD.csv", header=TRUE, verbose=TRUE)
 }
 
