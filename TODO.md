@@ -2,7 +2,9 @@
 
 - Add `verbose` argument to function `load_from_csv` so that when the function is executed
 a short status message is printed to the console. I.e. 
-    my_data <-load_from_csv("~/EURUSD.csv", verbose=TRUE)
+```R
+my_data <-load_from_csv("~/EURUSD.csv", verbose=TRUE)
+```
 should output either `Could not find file` or `Loaded 250,435 quotes`
 
 - `arb_plots` function should include a plot of arbitrage opportunity size vs 
