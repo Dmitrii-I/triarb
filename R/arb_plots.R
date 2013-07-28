@@ -8,7 +8,7 @@
 #'@seealso \code{\link{rate_prod}}
 #' @return Two plots, showing arbitrage opportunities for each of two possible roundtrips
 #' @examples
-#' arb_plots(rate_products)
+#' arb_plots(rp)
 #' 
 arb_plots <- function(rp) {
     par(mfrow=c(2, 2))

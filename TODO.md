@@ -1,5 +1,7 @@
 # To do
 
+- `arb_plots` uses now intermediate rate product dataframe as input. Let it use the quote data directly. Keep `rate_prod` under the hood as the workhorse.
+
 - Address scenario when first column of csv file does not contain valid timestamp.
 
 - Prettify the info printed by `load_from_csv`
