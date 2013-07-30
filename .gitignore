@@ -4,3 +4,4 @@ project_instructions.txt
 .RData
 .Rbuildignore
 triarb.Rproj
+*.swp
