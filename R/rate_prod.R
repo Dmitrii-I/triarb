@@ -1,20 +1,25 @@
 #' Computes currency rate products
 #' 
-#' The function returns the rate product of three currencies. Rate products
-#' larger than one signal arbitrage opportunity.
+#' The function returns the rate product of three currencies. A rate product
+#' larger than one indicates arbitrage opportunity.
+#' 
 #' @param x A data frame with first column being the date-time stamp and 
 #' columns 2 through 7 being the bid and ask quotes of the three currencies.
-#' @param rate1 Specifies the first currency rate in the form of a 6-character 
-#' currency rate identifier. For example, the eurodollar rate is specified by "EURUSD",
-#' the pound-dollar rate by "GBPUSD", and similarly for other currencies. Any
-#' identifier is accepted as long as the first three characters refer to the base
-#' currency and last three to the quote currency. Therefore "FOOBAR" is accepted, and
-#' it is up to the user to deal with semantics.
+#'
+#' @param rate1 character. A 6-letter currency rate identifier. First three
+#' letters should identify the base currency. The last three should identify 
+#' the quote currency. The three-letter currency identifier should preferrebly
+#' adhere to the currenct codes as specified by ISO 4217 standard (e.g. EUR for
+#' the euro, USD for the dollar, GBP for the pound). Any identifier is accepted
+#' though as long as the first three letters refer to the base currency and 
+#' last three to the quote currency. Therefore "FOOBAR" is accepted, and
+#' it is up to the user to deal with the semantics. 
 #' @param rate2 See 'rate1'
 #' @param rate3 See 'rate1' 
 #' @export
 #' @seealso \code{\link{arb_plots}}
-#' @return A data frame with 3 columns: timestamp, first rate product, and second rate product
+#' @return An object of the class `RateProduct`. This object is a  data frame 
+#' with 3 columns: timestamp, first rate product, and second rate product.
 #' @examples
 #' data(AUDCAD, AUDCHF, CADCHF)
 #' AUDCAD <- clean_quotes(AUDCAD)
@@ -95,5 +100,6 @@ rate_prod <- function(x, rate1, rate2, rate3) {
 
     names(result) <- c("timestamp", rp1_name, rp2_name)
 
+    class(result) <- "RateProduct"
     return(result)  
 }
