@@ -16,7 +16,7 @@
   opportunities found in a currencies triple.
 }
 \examples{
-arb_plots(rate_products)
+arb_plots(rp)
 }
 \seealso{
   \code{\link{rate_prod}}
