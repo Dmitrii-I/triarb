@@ -1,8 +1,8 @@
 # To do
 
-- `arb_plots` should be a wrapper of the individual plot functions. Therefore need to add individual plot functons
+- 'arb_plots' should be a combiner function of other different plot functions. I.e. plot(x, plottype=1), plot(x, plottype=2), and so on.
 
-- `arb_plots` uses now intermediate rate product dataframe as input. Let it use the quote data directly. Keep `rate_prod` under the hood as the workhorse.
+- The different plot functions should be S3 methods of class 'RateProduct'
 
 - Address scenario when first column of csv file does not contain valid timestamp.
 
@@ -23,31 +23,27 @@ at the market prices. This is quite a risky strategy though.
     - if there is a triangular arbitrage opportunity, perform the three trades at limit prices
     - and similar
 
-- allow for bid- and ask-sizes to be incorporate into the analysis
+- allow for bid- and ask-sizes to be incorporate into detection of outliers
 
-- Need to make plots in `arb_plots` prettier: larger and maybe colors?
+- Add a summary method
 
-- Add a summary function `arb_summary`.
-
-- Optimize `align` function, if possible. It is slow now. Maybe re-write in C/C++.
+- Optimize 'align' function, if possible. It is slow now. Maybe re-write in C/C++.
 
 - Write proper examples for the documentation. The scenarios of the examples need to be
 executable using the included dataset.
 
-- Add a vignette.
+- Add a vignette
 
-- Post to CRAN.
+- Post to CRAN
 
 - Make sure the package can deal with several formats of forex quotes (what formats are there?).
 
 - `clean_quotes` function documentation for return value is incorrect. It also needs
 to describe properly that it is a wrapper functions and what other functions it calls.
 
-- Add `very_verbose` argument to some functions.
+- Add 'very_verbose' argument to some functions.
 
 - Make sure the DESCRIPTION file mentions all packages that this package depends on. 
 Right now we need `zoo` package for our package.
 
-- In the documentation, the example for `arb_plots` should says something descriptive
-like `arb_plots(rate_products)` instead of `arb_plots(x)`
 
