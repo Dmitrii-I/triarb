@@ -1,7 +1,7 @@
 #' Computes currency rate products
 #' 
-#' The function returns the rate product of three currencies. A rate product
-#' larger than one indicates arbitrage opportunity.
+#' The function returns the rate product of three currencies in an `RateProduct`. 
+#' A rate product larger than one indicates arbitrage opportunity.
 #' 
 #' @param x A data frame with first column being the date-time stamp and 
 #' columns 2 through 7 being the bid and ask quotes of the three currencies.
