@@ -31,9 +31,9 @@
   and second rate product.
 }
 \description{
-  The function returns the rate product of three
-  currencies. A rate product larger than one indicates
-  arbitrage opportunity.
+  The function returns the rate product of three currencies
+  in an `RateProduct`. A rate product larger than one
+  indicates arbitrage opportunity.
 }
 \examples{
 data(AUDCAD, AUDCHF, CADCHF)

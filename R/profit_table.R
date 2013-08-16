@@ -1,7 +1,7 @@
 #' Triangular arbitrage profit table
 #' 
-#' This function computes triangular arbitrage profit for each tick occurring
-#' in either one of the three currencies.
+#' This function computes triangular arbitrage profit (in pips) 
+#' for each tick occurring in either one of the three currencies.
 #' 
 #' @param x A data frame with 7 columns. Timestamp in the first column,
 #' and bid & ask quotes of three currencies in columns 2-7. 
@@ -18,7 +18,7 @@
 #'
 #' @return An object of the class `TriArbProfitTable`. This is just a fancy 
 #' data frame with the columns: timestamp, age, profit of first roundtrip, and
-#' profit of second roundtrip. The age is the time difference with the next 
+#' profit of second roundtrip. The age is the time difference in seconds, with the next 
 #' tick, i.e. how long the arbitrage opportunity (if any) was available. 
 #'
 #' @examples
@@ -32,6 +32,7 @@
 profit_table <- function(x, curr_ids) {
     # to compute profit, the rates must have proper form
     # get the base and quote currencies of the rates first:
+    pips_mult = 10000L
     rates <- curr_ids
     base_currs <- sapply(rates, function(x) substr(x, 1, 3))
     quote_currs <- sapply(rates, function(x) substr(x, 4, 6))
@@ -91,8 +92,8 @@ profit_table <- function(x, curr_ids) {
         }     
     }
   
-    age <- c(diff(x$timestamp), 0)
-    result <- data.frame(x$timestamp, age, profit1, profit2)
+    age <- c(difftime(x$timestamp[-1], x$timestamp[-length(x$timestamp)], units='secs'), 0)
+    result <- data.frame(x$timestamp, age, profit1*pips_mult, profit2*pips_mult)
 
     # construct column names
     currs <- unique(c(base_currs, quote_currs))
@@ -101,7 +102,7 @@ profit_table <- function(x, curr_ids) {
     profit2_name <- paste(base_currs[1], "-", currs[!(currs %in% c(base_currs[1], quote_currs[1]))], sep="")
     profit2_name <- paste(profit2_name, "-", quote_currs[1], "-", base_currs[1], sep="")
 
-    names(result) <- c("timestamp", "age", profit1_name, profit2_name)
+    names(result) <- c("timestamp", "age in secs", profit1_name, profit2_name)
 
     class(result) <- c('TriArbProfitTable', 'data.frame') # inherits from data.frame too
     return(result)  
