@@ -21,11 +21,9 @@
 #'
 #' @export
 #'
-#' @seealso \code{\link{arb_plots}}
-#'
 #' @return An object of the class `TriArbProfitTable`. This is just a fancy 
 #' data frame with the columns: timestamp, age, profit of first roundtrip, and
-#' profit of second roundtrip. The age is the time difference in seconds, with the next 
+#' profit of second roundtrip. The age is the time in seconds until next 
 #' tick, i.e. how long the arbitrage opportunity (if any) was available. 
 #'
 #' @examples
