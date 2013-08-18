@@ -101,12 +101,12 @@ profit_table <- function(x, curr_ids) {
 
     # construct column names
     currs <- unique(c(base_currs, quote_currs))
-    profit1_name <- paste(base_currs[1], "-", quote_currs[1], "-", sep="")
-    profit1_name <- paste(profit1_name, currs[!(currs %in% c(base_currs[1], quote_currs[1]))], "-", base_currs[1], sep="")
-    profit2_name <- paste(base_currs[1], "-", currs[!(currs %in% c(base_currs[1], quote_currs[1]))], sep="")
-    profit2_name <- paste(profit2_name, "-", quote_currs[1], "-", base_currs[1], sep="")
+    colname1 <- paste(base_currs[1], quote_currs[1], sep="_")
+    colname1 <- paste(colname1, currs[!(currs %in% c(base_currs[1], quote_currs[1]))], base_currs[1], sep="_")
+    colname2 <- paste(base_currs[1], currs[!(currs %in% c(base_currs[1], quote_currs[1]))], sep="_")
+    colname2 <- paste(colname2, quote_currs[1], base_currs[1], sep="_")
 
-    names(result) <- c("timestamp", "age in secs", profit1_name, profit2_name)
+    names(result) <- c("timestamp", "age_in_secs", colname1, colname2)
 
     class(result) <- c('TriArbProfitTable', 'data.frame') # inherits from data.frame too
     return(result)  
