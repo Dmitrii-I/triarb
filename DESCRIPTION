@@ -16,7 +16,6 @@ Collate:
     'lookahead_medians.R'
     'lookback_medians.R'
     'outliers.R'
-    'rate_prod.R'
     'has_header.R'
     'load_from_csv.R'
     'align_quotes.R'
