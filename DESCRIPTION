@@ -19,3 +19,5 @@ Collate:
     'rate_prod.R'
     'has_header.R'
     'load_from_csv.R'
+    'align_quotes.R'
+    'profit_table.R'
