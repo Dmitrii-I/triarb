@@ -3,9 +3,16 @@
 #' This function computes triangular arbitrage profit (in pips) 
 #' for each tick occurring in either one of the three currencies.
 #' 
-#' @param x A data frame with 7 columns. Timestamp in the first column,
-#' and bid & ask quotes of three currencies in columns 2-7. 
+#' @param x A single data frame or a list of data frames. 
+#' 
+#' If a single data frame is provided, then it should be in the "aligned" 
+#' format: 7 columns, with column 1 having the timestamp, and columns 2-7 
+#' the bid-ask quotes of three currencies.  
 #'
+#' If a list of data frames is provided, it is assumed each data frame
+#' contains bid-ask quotes for a single currency. Alignment will then be done
+#' inside the 'profit_table' function using 'align_quotes' function.
+#' 
 #' @param curr_ids character vector with 3 elements. Each element is a 
 #' currency pair identifier of 6 letters. First three letters refer to base
 #' currency, the last three to quote currency. The three-letter currency 
@@ -26,17 +33,16 @@
 #' AUDCAD <- clean_quotes(AUDCAD)
 #' AUDCHF <- clean_quotes(AUDCHF)
 #' CADCHF <- clean_quotes(CADCHF)
-#' x <- align(list(AUDCAD, AUDCHF, CADCHF))
-#' rp <- rate_prod(x, c("AUDCAD", "AUDCHF", "CADCHF"))
+#' x <- align_quotes(list(AUDCAD, AUDCHF, CADCHF))
+#' rp <- profit_table(x, c("AUDCAD", "AUDCHF", "CADCHF"))
 
 profit_table <- function(x, curr_ids) {
-    # to compute profit, the rates must have proper form
-    # get the base and quote currencies of the rates first:
-    pips_mult = 10000L
-    rates <- curr_ids
-    base_currs <- sapply(rates, function(x) substr(x, 1, 3))
-    quote_currs <- sapply(rates, function(x) substr(x, 4, 6))
+    pips_mult = 10000L # will be replaced by a function in future
+    if (class(x) == 'list') x <- align_quotes(x)
 
+    # get the base and quote currencies of the rates first:
+    base_currs <- sapply(curr_ids, function(z) substr(z, 1, 3))
+    quote_currs <- sapply(curr_ids, function(z) substr(z, 4, 6))
     # each of the three currencies must appear exactly twice,
     # either as base or quote, otherwise no triangular arbitrage possible
     if (!all(table(c(base_currs, quote_currs)) == 2)) 
