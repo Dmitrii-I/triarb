@@ -2,7 +2,8 @@
 #' 
 #' Remove duplicate quotes, remove outliers, remove NAs, and arrange according to timestamp.
 #' 
-#' @param x A data frame with first column being the date-time stamp of POSIXct class
+#' @param x A data frame with three columns: timestamp, bid, ask. 
+#' Second and third columns are bids and asks.
 #' @param verbose logical TRUE or FALSE specifying whether function should output a summary
 #' as a side-effect.
 #' @export
