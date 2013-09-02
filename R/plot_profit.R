@@ -11,25 +11,29 @@
 #'
 plot_profit <- function(x, separate=FALSE, ...) {
 
-    single_plot <- function(title="", ...) {
+    single_plot <- function(title="", sub="", ...) {
         par(mai=c(1, 1, 1.5, 0.6))
         par(bty='l')
         plot(x[, 1], x[, 4], main=title_2, las=1, type='h', xlab='', ylab='', ...)
+        mtext(sub, line=2)
     }
 
     title_1 <- paste("Profit in pips for roundtrip ", gsub('_', ' - ', names(profit)[3]))
     title_2 <- paste("Profit in pips for roundtrip ", gsub('_', ' - ', names(profit)[4]))
+
+    sub_1 <- paste("Number of ticks: ", nrow(x))
+    sub_2 <- paste("Number of ticks: ", nrow(x))
     
     if (separate==FALSE) {
         dev.new(width=11, height=10, xpos=100, ypos=100)
         par(mfrow=c(2, 1), bty='l')
-        single_plot(title=title_1, ...)        
-        single_plot(title=title_2, ...)        
+        single_plot(title=title_1, sub_1, ...)        
+        single_plot(title=title_2, sub_2, ...)        
     } else {
         dev.new(width=11, height=6, xpos=100, ypos=100)
-        single_plot(title=title_1, ...)        
+        single_plot(title=title_1, sub_1, ...)        
         dev.new(width=11, height=6, xpos=150, ypos=150)
-        single_plot(title=title_2, ...)        
+        single_plot(title=title_2, sub_2, ...)        
     }
 
 }
