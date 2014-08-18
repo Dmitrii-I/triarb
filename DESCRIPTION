@@ -20,3 +20,4 @@ Collate:
     'align_quotes.R'
     'profit_table.R'
     'plot_profit.R'
+    'plot_profit_sorted.R'
