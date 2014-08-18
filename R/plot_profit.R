@@ -20,7 +20,7 @@ plot_profit <- function(x, separate_plots=FALSE, ...) {
         par(mai=c(1, 1, 1.5, 0.6), bty="l") # set inside margin and box type
         # instead of passing x, thereby copying it unnecessarily, we just past column names
         plot(x$timestamp, x[, col], main=title, las=1, type='h', xlab='', ylab='', ...)
-        mtext(build_subtitle(col), line=2, cex=0.9)
+        mtext(build_subtitle(col), line=1, cex=0.9)
     }
 
     build_subtitle <- function(col) {
