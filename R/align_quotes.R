@@ -36,7 +36,7 @@
 #' AUDCAD <- clean_quotes(AUDCAD)
 #' AUDCHF <- clean_quotes(AUDCHF)
 #' CADCHF <- clean_quotes(CADCHF)
-#' combined <- align(list(AUDCAD, AUDCHF, CADCHF)) # this may take some time to complete
+#' combined <- align_quotes(list(AUDCAD, AUDCHF, CADCHF)) # this may take some time to complete
 
 align_quotes <- function(quotes_list) {
     # Returns a single data frame with aligned bids and asks of multiple

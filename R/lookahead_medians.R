@@ -13,7 +13,7 @@
 #' head(medians)
 #'
 
-lookahead_medians <- function (x, window) {
+lookahead_medians <- function (x, window=11) {
     # window should be odd (runmed() requires that), if not, make it odd
     if (window %% 2 == 0) window <- window + 1 
     

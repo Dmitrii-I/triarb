@@ -7,17 +7,4 @@ Author: Dmitrii Izgurskii
 Maintainer: Dmitrii Izgurskii <izgurskii@gmail.com>
 Description: This package helps analyze triangular arbitrage opportunities in
     currency exchange rates
-License: No license whatsoever
-Collate:
-    'arb_plots.R'
-    'clean_quotes.R'
-    'consec_dups.R'
-    'lookahead_medians.R'
-    'lookback_medians.R'
-    'outliers.R'
-    'has_header.R'
-    'load_from_csv.R'
-    'align_quotes.R'
-    'profit_table.R'
-    'plot_profit.R'
-    'plot_profit_sorted.R'
+License: MIT + file LICENSE

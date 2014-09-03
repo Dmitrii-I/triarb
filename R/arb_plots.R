@@ -1,14 +1,20 @@
 #' Visualize triangular arbitrage opportunities
 #' 
 #' This function plots a bar chart of arbitrage opportunities found in a currencies triple. 
-#' @param rp A data frame returned by 'rate_prod' function
+#' @param pt An object of the class `TriArbProfitTable` returned by 'profit_table' function
 #' @export
 #'
 #'
 #'@seealso \code{\link{rate_prod}}
 #' @return Two plots, showing arbitrage opportunities for each of two possible roundtrips
 #' @examples
-#' arb_plots(rp)
+#' data(AUDCAD, AUDCHF, CADCHF)
+#' AUDCAD <- clean_quotes(AUDCAD)
+#' AUDCHF <- clean_quotes(AUDCHF)
+#' CADCHF <- clean_quotes(CADCHF)
+#' x <- align_quotes(list(AUDCAD, AUDCHF, CADCHF))
+#' pt <- profit_table(x, c("AUDCAD", "AUDCHF", "CADCHF")) 
+#' arb_plots(pt)
 #' 
 arb_plots <- function(rp) {
     par(mfrow=c(2, 2))

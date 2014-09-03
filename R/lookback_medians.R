@@ -13,7 +13,7 @@
 #' head(medians)
 #'
 
-lookback_medians <- function (x, window) {
+lookback_medians <- function (x, window=11) {
     if (window %% 2 == 0) window <- window + 1 
     
     # runmed() centers the window around current observation. 
